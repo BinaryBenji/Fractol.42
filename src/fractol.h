@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include <fcntl.h>
 #include "mlx.h"
 
@@ -25,9 +25,6 @@ typedef struct 		s_env
 	double			z_r;
 	double			z_i;
 	double			i;
-
-
-
 }			   		t_env;
 
 void 	draw(t_env env);

@@ -1,1 +1,1 @@
-gcc -o fractol  main.c  libft/libft.a -g -lmlx -framework OpenGL -framework AppKit
+gcc -o src/fractol  src/main.c  libft/libft.a -g -lmlx -framework OpenGL -framework AppKit
