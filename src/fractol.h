@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include "mlx.h"
 
-typedef struct 		s_env
+typedef struct 		s_e
 {
 	void 			*mlx;
 	void 			*win;
@@ -25,7 +25,16 @@ typedef struct 		s_env
 	double			z_r;
 	double			z_i;
 	double			i;
-}			   		t_env;
+	int				width;	
+	int				height;
+	unsigned long 	color;
+}			   		t_e;
 
-void 	draw(t_env env);
+void 	draw(t_e *e);
+void 	ft_map(t_e *e);
+int 	key_pressed(int keycode, t_e *e);
+t_e		init_map(t_e *e);
+int		exiterror(void);
+int		error(void);
+int		usage(void);
 #endif

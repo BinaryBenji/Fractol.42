@@ -6,14 +6,14 @@
 #    By: bzmuda <bzmuda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/30 09:43:03 by bzmuda            #+#    #+#              #
-#    Updated: 2017/05/30 09:43:09 by bzmuda           ###   ########.fr        #
+#    Updated: 2017/06/04 15:57:45 by bzmuda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #	Library
 NAME = 				fractol
 
-# 	Compiler 
+# 	Compiler
 CC = 				gcc
 
 #	Flags for norme + LLDB
@@ -27,8 +27,8 @@ HEA = 				$(addprefix $(HEA_PATH)/,$(HEA_NAME))
 
 #	Sources infos
 SRC_PATH = 			./src
-SRC_NAME = 			main.c
-SRC = 				$(addprefix $(SRC_PATH)/,$(SRC_NAME))		
+SRC_NAME = 			main.c utils.c
+SRC = 				$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 #	Objects infos
 OBJ_PATH = 			./src
@@ -47,17 +47,17 @@ $(NAME): 			$(OBJ) $(HEA)
 					@echo "Fractol compilation complete."
 
 %.o: 				%.c $(HEA)
-					@$(CC) $(CFLAGS) -c $< -o $@ 
+					@$(CC) $(CFLAGS) -c $< -o $@
 
-clean:				
+clean:
 					@rm -rf $(OBJ)
 					@make -C libft clean
-					@echo "Object files deleted." 
+					@echo "Object files deleted."
 
 fclean: 			clean
 					@make -C libft fclean
-					@rm -rf $(NAME) 
-					@echo "Executable deleted." 
+					@rm -rf $(NAME)
+					@echo "Executable deleted."
 
 re: 				fclean all
 
