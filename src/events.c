@@ -12,11 +12,26 @@
 
 #include "fractol.h"
 
+
+/*
+**	Main function for events.
+*/
+
 int 	key_pressed(int keycode, t_e *e)
 {
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 54)
-		e->color = e->color;
+	if (keycode == 69)
+	{
+		e->itmax++;
+		mlx_clear_window(e->mlx, e->win);
+		launch_draw(e);
+	}
+	if (keycode == 78)
+	{
+		e->itmax--;
+		mlx_clear_window(e->mlx, e->win);
+		launch_draw(e);
+	}
 	return (0);
 }

@@ -12,6 +12,10 @@
 
 #include "fractol.h"
 
+/*
+**	Initialize parameters for Julia fractal.
+*/
+
 t_e		init_julia(t_e *e)
 {
 	e->width = 1000;
@@ -24,12 +28,14 @@ t_e		init_julia(t_e *e)
 	e->zoom = 1;
 	e->movex = 0;
 	e->movey = 0;
-	e->color = 0;
-	e->itmax = 300;
 	e->color = 0x00ffff;
+	e->itmax = 300;
 	return (*e);
 }
 
+/*
+**	Draw the Julia fractal.
+*/
 
 void 	draw_julia(t_e *e)
 {

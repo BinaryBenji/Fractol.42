@@ -12,6 +12,10 @@
 
 #include "fractol.h"
 
+/*
+**	Draw the right fractal.
+*/
+
 void 	launch_draw(t_e *e)
 {
 	if (e->indexfrac == 1)
@@ -22,6 +26,10 @@ void 	launch_draw(t_e *e)
 		printf("oth");
 }
 
+/*
+**	Drawing loop
+*/
+
 void 	ft_map(t_e *e)
 {
 	e->mlx = mlx_init();
@@ -30,6 +38,10 @@ void 	ft_map(t_e *e)
 	mlx_key_hook(e->win, key_pressed, NULL);
 	mlx_loop(e->mlx);
 }
+
+/*
+**	Verify params & store the good info
+*/
 
 int 	select_frac(t_e *e, char *param)
 {
@@ -51,6 +63,10 @@ int 	select_frac(t_e *e, char *param)
 		return (0);
 	return (1);
 }
+
+/*
+**	Main
+*/
 
 int 	main(int argc, char **argv)
 {

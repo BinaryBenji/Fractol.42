@@ -56,4 +56,5 @@ int					usage(void);
 int 				select_frac(t_e *e, char *param);
 void 				draw_julia(t_e *e);
 t_e					reinit_mandel(t_e *e);
+void 				launch_draw(t_e *e);
 #endif

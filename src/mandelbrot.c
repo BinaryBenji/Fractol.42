@@ -12,6 +12,10 @@
 
 #include "fractol.h"
 
+/*
+**	Initialize parameters for Mandelbrot fractal.
+*/
+
 t_e		init_mandel(t_e *e)
 {
 	e->width = 1000;
@@ -24,7 +28,6 @@ t_e		init_mandel(t_e *e)
 	e->zoom = 1;
 	e->movex = -0.5;
 	e->movey = 0;
-	e->color = 0;
 	e->itmax = 300;
 	e->color = 0x00ffff;
 	e->newRe = 0;
@@ -34,6 +37,10 @@ t_e		init_mandel(t_e *e)
 	return (*e);
 }
 
+/*
+**	Reinitialize real part & imaginary part to 0
+*/
+
 t_e		reinit_mandel(t_e *e)
 {
 	e->newRe = 0;
@@ -42,6 +49,10 @@ t_e		reinit_mandel(t_e *e)
 	e->oldIm = 0;
 	return (*e);
 }
+
+/*
+**	Draw the Mandelbrot fractal.
+*/
 
 void 	draw_mandel(t_e *e)
 {
