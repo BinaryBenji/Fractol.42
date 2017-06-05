@@ -12,33 +12,61 @@
 
 #include "fractol.h"
 
+t_e		init_mandel(t_e *e)
+{
+	e->width = 1000;
+	e->height = 1000;
+	e->cRe = -0.7;
+	e->cIm = 0.27015;
+	e->x = 0;
+	e->y = 0;
+	e->i = 0;
+	e->zoom = 1;
+	e->movex = -0.5;
+	e->movey = 0;
+	e->color = 0;
+	e->itmax = 300;
+	e->color = 0x00ffff;
+	e->newRe = 0;
+	e->oldRe = 0;
+	e->newIm = 0;
+	e->oldIm = 0;
+	return (*e);
+}
+
+t_e		reinit_mandel(t_e *e)
+{
+	e->newRe = 0;
+	e->oldRe = 0;
+	e->newIm = 0;
+	e->oldIm = 0;
+	return (*e);
+}
+
 void 	draw_mandel(t_e *e)
 {
-	int x = 0;
-	int y = 0;
-
-	while (x < e->img_x)
+	while (e->y < e->height)
 	{
-		while (y < e->img_y)
+		while (e->x < e->width)
 		{
-			e->c_r = x / e->zoom + e->x1;
-			e->c_i = y / e->zoom + e->y1;
-			e->z_r = 0;
-			e->z_i = 0;
-			e->i = 0;
-			while ((e->z_r*e->z_r - e->z_i*e->z_i < 4) && e->i < e->itmax)
+			e->pr = 1.5 * (e->x - e->width / 2) / (0.5 * e->zoom * e->width) + e->movex;
+    		e->pi = (e->y - e->height / 2) / (0.5 * e->zoom * e->height) + e->movey;
+    		reinit_mandel(e);
+			while (e->i < e->itmax)
 			{
-				int tmp = e->z_r;
-				e->z_r = e->z_r * e->z_r - e->z_i * e->z_i + e->c_r;
-				e->z_i = 2* e->z_i*tmp + e->c_i;
+				e->oldRe = e->newRe;
+				e->oldIm = e->newIm;
+				e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
+				e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
+				if((e->newRe * e->newRe + e->newIm * e->newIm) > 4)
+					break;
 				e->i++;
 			}
-			if (e->i == e->itmax)
-				mlx_pixel_put(e->mlx, e->win, x, y, e->color);
-			else
-				mlx_pixel_put(e->mlx, e->win, x, y, e->color);
-			y++;
+			mlx_pixel_put(e->mlx, e->win, e->x, e->y, e->color);
+			e->x++;
+			e->i = 0;
 		}
-		x++;
+		e->x = 0;
+		e->y++;
 	}
 }

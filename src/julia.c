@@ -12,33 +12,49 @@
 
 #include "fractol.h"
 
+t_e		init_julia(t_e *e)
+{
+	e->width = 1000;
+	e->height = 1000;
+	e->cRe = -0.7;
+	e->cIm = 0.27015;
+	e->x = 0;
+	e->y = 0;
+	e->i = 0;
+	e->zoom = 1;
+	e->movex = 0;
+	e->movey = 0;
+	e->color = 0;
+	e->itmax = 300;
+	e->color = 0x00ffff;
+	return (*e);
+}
+
+
 void 	draw_julia(t_e *e)
 {
-	int x = 0;
-	int y = 0;
-
-	while (x < e->img_x)
+	while (e->y < e->height)
 	{
-		while (y < e->img_y)
+		while (e->x < e->width)
 		{
-			e->c_r = x / e->zoom + e->x1;
-			e->c_i = y / e->zoom + e->y1;
-			e->z_r = 0;
-			e->z_i = 0;
-			e->i = 0;
-			while ((e->z_r*e->z_r - e->z_i*e->z_i < 4) && e->i < e->itmax)
+			e->newRe = 1.5 * (e->x - e->width / 2) / (0.5 * e->zoom * e->width) + e->movex;
+			e->newIm = (e->y - e->height / 2) / (0.5 * e->zoom * e->height) + e->movey;
+			while (e->i < e->itmax)
 			{
-				int tmp = e->z_r;
-				e->z_r = e->z_r * e->z_r - e->z_i * e->z_i + e->c_r;
-				e->z_i = 2* e->z_i*tmp + e->c_i;
+				e->oldRe = e->newRe;
+				e->oldIm = e->newIm;
+				e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->cRe;
+				e->newIm = 2 * e->oldRe * e->oldIm + e->cIm;
+				if((e->newRe * e->newRe + e->newIm * e->newIm) > 4)
+					break;
+				//e->color = HSVtoRGB(ColorHSV(e->i % 256, 255, 255 * (e->i < e->itmax)));
 				e->i++;
 			}
-			if (e->i == e->itmax)
-				mlx_pixel_put(e->mlx, e->win, x, y, e->color);
-			else
-				mlx_pixel_put(e->mlx, e->win, x, y, e->color);
-			y++;
+			e->i = 0;
+			mlx_pixel_put(e->mlx, e->win, e->x, e->y, e->color);
+			e->x++;
 		}
-		x++;
+		e->x = 0;
+		e->y++;
 	}
 }

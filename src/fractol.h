@@ -24,19 +24,21 @@ typedef struct 		s_e
 {
 	void 			*mlx;
 	void 			*win;
-	double			x1;
-	double 			x2;
-	double			y1;
-	double			y2;
-	double			itmax;
+	double			cRe;
+	double			cIm;
+	int 			x;
+	int 			y;
+	int 			i;
 	double			zoom;
-	double			img_x;
-	double			img_y;
-	double			c_i;
-	double			c_r;
-	double			z_r;
-	double			z_i;
-	double			i;
+	double 			movex;
+	double 			movey;
+	double			newRe;
+	double			newIm;
+	double			oldRe;
+	double 			oldIm;
+	double			pr;
+	double			pi;
+	int 			itmax;
 	int				width;	
 	int				height;
 	unsigned long 	color;
@@ -46,10 +48,12 @@ typedef struct 		s_e
 void 				draw_mandel(t_e *e);
 void 				ft_map(t_e *e);
 int 				key_pressed(int keycode, t_e *e);
-t_e					init_map(t_e *e);
+t_e					init_mandel(t_e *e);
+t_e					init_julia(t_e *e);
 int					exiterror(void);
 int					error(void);
 int					usage(void);
 int 				select_frac(t_e *e, char *param);
 void 				draw_julia(t_e *e);
+t_e					reinit_mandel(t_e *e);
 #endif

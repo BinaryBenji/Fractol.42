@@ -16,15 +16,7 @@ int 	key_pressed(int keycode, t_e *e)
 {
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 126) // up
-	{
-		printf("Zoom In");
-		e->zoom = e->zoom * 1.5;
-	}
-	if (keycode == 125) // down
-	{
-		printf("Zoom Out");
-		e->zoom = e->zoom * 0.75;
-	}
+	if (keycode == 54)
+		e->color = e->color;
 	return (0);
 }
