@@ -1,58 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bzmuda <bzmuda@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/05 11:09:52 by bzmuda            #+#    #+#             */
+/*   Updated: 2017/06/05 11:09:53 by bzmuda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int 	key_pressed(int keycode, t_e *e)
+void 	launch_draw(t_e *e)
 {
-	if (keycode == 53) // quit
-		exit(0);
-	if (keycode == 126) // up
-	{
-		printf("Zoom In");
-		e->zoom = e->zoom * 1.5;
-	}
-	if (keycode == 125) // down
-	{
-		printf("Zoom Out");
-		e->zoom = e->zoom * 0.75;
-	}
-	return (0);
-}
-
-void 	draw(t_e *e)
-{
-	int x = 0;
-	int y = 0;
-
-	while (x < e->img_x)
-	{
-		while (y < e->img_y)
-		{
-			e->c_r = x / e->zoom + e->x1;
-			e->c_i = y / e->zoom + e->y1;
-			e->z_r = 0;
-			e->z_i = 0;
-			e->i = 0;
-			while ((e->z_r*e->z_r - e->z_i*e->z_i < 4) && e->i < e->itmax)
-			{
-				int tmp = e->z_r;
-				e->z_r = e->z_r * e->z_r - e->z_i * e->z_i + e->c_r;
-				e->z_i = 2* e->z_i*tmp + e->c_i;
-				e->i++;
-			}
-			if (e->i == e->itmax)
-				mlx_pixel_put(e->mlx, e->win, x, y, e->color);
-			else
-				mlx_pixel_put(e->mlx, e->win, x, y, e->color);
-			y++;
-		}
-		x++;
-	}
+	if (e->indexfrac == 1)
+		draw_julia(e);
+	else if (e->indexfrac == 2)
+		draw_mandel(e);
+	else
+		printf("oth");
 }
 
 void 	ft_map(t_e *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->width, e->height, "Fractol");
-	draw(e);
+	launch_draw(e);
 	mlx_key_hook(e->win, key_pressed, NULL);
 	mlx_loop(e->mlx);
 }
@@ -73,13 +47,27 @@ t_e		init_map(t_e *e)
 	return (*e);
 }
 
+int 	select_frac(t_e *e, char *param)
+{
+	if (ft_strcmp(param, "julia") == 0)
+		e->indexfrac = 1;
+	else if (ft_strcmp(param, "mandelbrot") == 0)
+		e->indexfrac = 2;
+	else if (ft_strcmp(param, "oth") == 0)
+		e->indexfrac = 3;
+	else
+		return (0);
+	return (1);
+}
+
 int 	main(int argc, char **argv)
 {
 	t_e e;
 
 	if (argc != 2)
 		return (usage());
-	argv[1] = argv[1];
+	if (select_frac(&e, argv[1]) == 0)
+		return (usage());
 	init_map(&e);
 	ft_map(&e);
 	return (0);
