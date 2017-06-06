@@ -51,7 +51,26 @@ t_e		reinit_mandel(t_e *e)
 }
 
 /*
-**	Draw the Mandelbrot fractal.
+**	Calculate, for each iterations.
+*/
+
+t_e 	exten_mandel(t_e *e)
+{
+	while (e->i < e->itmax)
+	{
+		e->oldRe = e->newRe;
+		e->oldIm = e->newIm;
+		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
+		e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4)
+			break;
+		e->i++;
+	}
+	return (*e);
+}
+
+/*
+**	Create image of Mandelbrot fractal.
 */
 
 void 	draw_mandel(t_e *e)
@@ -63,21 +82,18 @@ void 	draw_mandel(t_e *e)
 			e->pr = 1.5 * (e->x - e->width / 2) / (0.5 * e->zoom * e->width) + e->movex;
     		e->pi = (e->y - e->height / 2) / (0.5 * e->zoom * e->height) + e->movey;
     		reinit_mandel(e);
-			while (e->i < e->itmax)
-			{
-				e->oldRe = e->newRe;
-				e->oldIm = e->newIm;
-				e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
-				e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
-				if((e->newRe * e->newRe + e->newIm * e->newIm) > 4)
-					break;
-				e->i++;
-			}
-			mlx_pixel_put(e->mlx, e->win, e->x, e->y, e->color);
+			exten_mandel(e);
+			if (e->i == e->itmax)
+				pix_to_img(e, 0x000000);
+			else
+				pix_to_img(e, (e->color * e->i));
 			e->x++;
 			e->i = 0;
 		}
 		e->x = 0;
 		e->y++;
 	}
+	e->imgstr = mlx_new_image(e->mlx, e->width, e->height);
+	e->imgptr = mlx_get_data_addr(e->imgstr, &(e->bpp), &(e->s_l), &(e->endian));
+	mlx_put_image_to_window(e->mlx, e->win, e->imgptr, 0, 0);
 }

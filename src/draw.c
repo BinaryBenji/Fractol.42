@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bzmuda <bzmuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/05 11:09:17 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/06/05 11:09:22 by bzmuda           ###   ########.fr       */
+/*   Created: 2017/06/06 09:47:39 by bzmuda            #+#    #+#             */
+/*   Updated: 2017/06/06 09:47:40 by bzmuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-
-/*
-**	Main function for events.
-*/
-
-int 	key_pressed(int keycode, t_e *e)
+void 	pix_to_img(t_e *e, int color)
 {
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 69)
-	{
-		e->itmax++;
-		mlx_clear_window(e->mlx, e->win);
-		ft_putstr("UP Itmax : ");
-		ft_putnbr(e->itmax);
-		launch_draw(e);
-	}
-	if (keycode == 78)
-	{
-		e->itmax--;
-		ft_putstr("DOWN Itmax : ");
-		ft_putnbr(e->itmax);
-		mlx_clear_window(e->mlx, e->win);
-		launch_draw(e);
-	}
-	return (0);
+	// e->color = color;
+	
+	e->color = mlx_get_color_value(e->mlx, color);
+	
+	//printf("color : %d\n", e->color);
 }

@@ -24,6 +24,11 @@ typedef struct 		s_e
 {
 	void 			*mlx;
 	void 			*win;
+	void			*imgptr;
+	char			*imgstr;
+	int 			endian;
+	int 			s_l;
+	int 			bpp;
 	double			cRe;
 	double			cIm;
 	int 			x;
@@ -41,10 +46,11 @@ typedef struct 		s_e
 	int 			itmax;
 	int				width;	
 	int				height;
-	unsigned long 	color;
+	int 		 	color;
 	int 			indexfrac;
 }			   		t_e;
 
+void 				pix_to_img(t_e *e, int color);
 void 				draw_mandel(t_e *e);
 void 				ft_map(t_e *e);
 int 				key_pressed(int keycode, t_e *e);

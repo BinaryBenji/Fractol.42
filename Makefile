@@ -6,7 +6,7 @@
 #    By: bzmuda <bzmuda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/30 09:43:03 by bzmuda            #+#    #+#              #
-#    Updated: 2017/06/05 11:21:56 by bzmuda           ###   ########.fr        #
+#    Updated: 2017/06/06 09:48:00 by bzmuda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ HEA = 				$(addprefix $(HEA_PATH)/,$(HEA_NAME))
 
 #	Sources infos
 SRC_PATH = 			./src
-SRC_NAME = 			main.c utils.c events.c julia.c mandelbrot.c
+SRC_NAME = 			main.c utils.c events.c julia.c mandelbrot.c draw.c
 SRC = 				$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 #	Objects infos

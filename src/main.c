@@ -61,6 +61,8 @@ int 	select_frac(t_e *e, char *param)
 	}
 	else
 		return (0);
+	// if (!(e->imgstr = (char *)malloc(sizeof(char) * 1000000)))
+	// 	return (0);
 	return (1);
 }
 
@@ -72,9 +74,7 @@ int 	main(int argc, char **argv)
 {
 	t_e e;
 
-	if (argc != 2)
-		return (usage());
-	if (select_frac(&e, argv[1]) == 0)
+	if ((argc != 2) || (select_frac(&e, argv[1]) == 0))
 		return (usage());
 	ft_map(&e);
 	return (0);
