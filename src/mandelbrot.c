@@ -34,6 +34,8 @@ t_e		init_mandel(t_e *e)
 	e->oldRe = 0;
 	e->newIm = 0;
 	e->oldIm = 0;
+	e->imgstr = mlx_new_image(e->mlx, e->width, e->height);
+	e->imgptr = mlx_get_data_addr(e->imgstr, &(e->bpp), &(e->s_l), &(e->endian));
 	return (*e);
 }
 
@@ -93,7 +95,5 @@ void 	draw_mandel(t_e *e)
 		e->x = 0;
 		e->y++;
 	}
-	e->imgstr = mlx_new_image(e->mlx, e->width, e->height);
-	e->imgptr = mlx_get_data_addr(e->imgstr, &(e->bpp), &(e->s_l), &(e->endian));
-	mlx_put_image_to_window(e->mlx, e->win, e->imgptr, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win, e->imgstr, 0, 0);
 }

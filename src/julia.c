@@ -30,6 +30,8 @@ t_e		init_julia(t_e *e)
 	e->movey = 0;
 	e->color = 4;
 	e->itmax = 300;
+	e->imgstr = mlx_new_image(e->mlx, e->width, e->height);
+	e->imgptr = mlx_get_data_addr(e->imgstr, &(e->bpp), &(e->s_l), &(e->endian));
 	return (*e);
 }
 
@@ -75,7 +77,5 @@ void 	draw_julia(t_e *e)
 		e->x = 0;
 		e->y++;
 	}
-	e->imgstr = mlx_new_image(e->mlx, e->width, e->height);
-	e->imgptr = mlx_get_data_addr(e->imgstr, &(e->bpp), &(e->s_l), &(e->endian));
-	mlx_put_image_to_window(e->mlx, e->win, e->imgptr, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win, e->imgstr, 0, 0);
 }
