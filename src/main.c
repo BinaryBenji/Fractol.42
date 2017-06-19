@@ -19,11 +19,21 @@
 void 	launch_draw(t_e *e)
 {
 	if (e->indexfrac == 1)
+	{
+		e->imgptr = mlx_new_image(e->mlx, e->width, e->height);
+		e->imgstr = mlx_get_data_addr(e->imgptr, &(e->bpp), &(e->s_l), &(e->endian));
 		draw_julia(e);
+	}
 	else if (e->indexfrac == 2)
+	{
+		e->imgptr = mlx_new_image(e->mlx, e->width, e->height);
+		e->imgstr = mlx_get_data_addr(e->imgptr, &(e->bpp), &(e->s_l), &(e->endian));
 		draw_mandel(e);
-	else
+	}
+	else if (e->indexfrac == 3)
 		printf("oth");
+	else
+		printf("incorrect");
 }
 
 /*
@@ -61,8 +71,6 @@ int 	select_frac(t_e *e, char *param)
 	}
 	else
 		return (0);
-	// if (!(e->imgstr = (char *)malloc(sizeof(char) * 1000000)))
-	// 	return (0);
 	return (1);
 }
 

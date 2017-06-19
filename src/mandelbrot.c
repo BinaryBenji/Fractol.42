@@ -29,13 +29,11 @@ t_e		init_mandel(t_e *e)
 	e->movex = -0.5;
 	e->movey = 0;
 	e->itmax = 300;
-	e->color = 0x00ffff;
+	//e->color = 0x00ffff;
 	e->newRe = 0;
 	e->oldRe = 0;
 	e->newIm = 0;
 	e->oldIm = 0;
-	e->imgstr = mlx_new_image(e->mlx, e->width, e->height);
-	e->imgptr = mlx_get_data_addr(e->imgstr, &(e->bpp), &(e->s_l), &(e->endian));
 	return (*e);
 }
 
@@ -86,14 +84,14 @@ void 	draw_mandel(t_e *e)
     		reinit_mandel(e);
 			exten_mandel(e);
 			if (e->i == e->itmax)
-				pix_to_img(e, 0x000000);
+				pix_to_img(e, e->i * 0);
 			else
-				pix_to_img(e, (e->color * e->i));
+				pix_to_img(e, e->i);
 			e->x++;
-			e->i = 0;
+			e->i = 20;
 		}
 		e->x = 0;
 		e->y++;
 	}
-	mlx_put_image_to_window(e->mlx, e->win, e->imgstr, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win, e->imgptr, 0, 0);
 }

@@ -28,10 +28,8 @@ t_e		init_julia(t_e *e)
 	e->zoom = 1;
 	e->movex = 0;
 	e->movey = 0;
-	e->color = 4;
+	//e->color = 254;
 	e->itmax = 300;
-	e->imgstr = mlx_new_image(e->mlx, e->width, e->height);
-	e->imgptr = mlx_get_data_addr(e->imgstr, &(e->bpp), &(e->s_l), &(e->endian));
 	return (*e);
 }
 
@@ -47,7 +45,7 @@ t_e 	exten_julia(t_e *e)
 		e->oldIm = e->newIm;
 		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->cRe;
 		e->newIm = 2 * e->oldRe * e->oldIm + e->cIm;
-		if(((e->newRe * e->newRe) + (e->newIm * e->newIm)) > 4)
+		if (((e->newRe * e->newRe) + (e->newIm * e->newIm)) > 4)
 			break;
 		e->i++;
 	}
@@ -68,14 +66,14 @@ void 	draw_julia(t_e *e)
 			e->newIm = (e->y - e->height / 2) / (0.5 * e->zoom * e->height) + e->movey;
 			exten_julia(e);
 			if (e->i == e->itmax)
-				pix_to_img(e, 0x000000);
+				pix_to_img(e, e->i * 0);	
 			else
-				pix_to_img(e, (e->color * e->i));
+				pix_to_img(e, (e->i));
 			e->x++;
-			e->i = 0;
+			e->i = 20;
 		}
 		e->x = 0;
 		e->y++;
 	}
-	mlx_put_image_to_window(e->mlx, e->win, e->imgstr, 0, 0);
+	mlx_put_image_to_window(e, e->win, e->imgptr, 0, 0);
 }
