@@ -12,8 +12,9 @@
 
 #include "fractol.h"
 
-void 	pix_to_img(t_e *e, int color)
-{	
+void	pix_to_img(t_e *e, int color)
+{
 	e->color = mlx_get_color_value(e->mlx, color);
-	ft_memcpy(e->imgstr + (4 * (e->width * e->y)) + (e->x * 4),&e->color, sizeof(int));
+	ft_memmove(e->imgstr + (4 * (e->width * e->y))
+		+ (e->x * 4), &e->color, sizeof(int));
 }

@@ -19,15 +19,11 @@
 void 	launch_draw(t_e *e)
 {
 	if (e->indexfrac == 1)
-	{
-		e->imgptr = mlx_new_image(e->mlx, e->width, e->height);
-		e->imgstr = mlx_get_data_addr(e->imgptr, &(e->bpp), &(e->s_l), &(e->endian));
+	{	
 		draw_julia(e);
 	}
 	else if (e->indexfrac == 2)
 	{
-		e->imgptr = mlx_new_image(e->mlx, e->width, e->height);
-		e->imgstr = mlx_get_data_addr(e->imgptr, &(e->bpp), &(e->s_l), &(e->endian));
 		draw_mandel(e);
 	}
 	else if (e->indexfrac == 3)
@@ -44,8 +40,12 @@ void 	ft_map(t_e *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->width, e->height, "Fractol");
+	e->imgptr = mlx_new_image(e->mlx, e->width, e->height);
+	e->imgstr = mlx_get_data_addr(e->imgptr, &(e->bpp), &(e->s_l), &(e->endian));
 	launch_draw(e);
 	mlx_key_hook(e->win, key_pressed, NULL);
+	if (e->indexfrac == 1)
+		mlx_hook(e->win, 6, 1L < 6, mouse_juju, e);
 	mlx_loop(e->mlx);
 }
 

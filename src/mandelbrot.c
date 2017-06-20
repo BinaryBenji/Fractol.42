@@ -28,8 +28,7 @@ t_e		init_mandel(t_e *e)
 	e->zoom = 1;
 	e->movex = -0.5;
 	e->movey = 0;
-	e->itmax = 300;
-	//e->color = 0x00ffff;
+	e->itmax = 400;
 	e->newRe = 0;
 	e->oldRe = 0;
 	e->newIm = 0;
@@ -62,7 +61,7 @@ t_e 	exten_mandel(t_e *e)
 		e->oldIm = e->newIm;
 		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
 		e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
-		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4)
+		if ((e->newRe * e->newRe + e->newIm * e->newIm) > 4)
 			break;
 		e->i++;
 	}
@@ -86,7 +85,7 @@ void 	draw_mandel(t_e *e)
 			if (e->i == e->itmax)
 				pix_to_img(e, e->i * 0);
 			else
-				pix_to_img(e, e->i);
+				pix_to_img(e, e->i * 20000000);
 			e->x++;
 			e->i = 20;
 		}

@@ -28,8 +28,9 @@ t_e		init_julia(t_e *e)
 	e->zoom = 1;
 	e->movex = 0;
 	e->movey = 0;
-	//e->color = 254;
-	e->itmax = 300;
+	e->itmax = 200;
+	e->ix = 1;
+	e->iy = 1;
 	return (*e);
 }
 
@@ -43,8 +44,8 @@ t_e 	exten_julia(t_e *e)
 	{
 		e->oldRe = e->newRe;
 		e->oldIm = e->newIm;
-		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->cRe;
-		e->newIm = 2 * e->oldRe * e->oldIm + e->cIm;
+		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->cRe * e->ix;
+		e->newIm = 2 * e->oldRe * e->oldIm + e->cIm * e->iy;
 		if (((e->newRe * e->newRe) + (e->newIm * e->newIm)) > 4)
 			break;
 		e->i++;
@@ -58,19 +59,23 @@ t_e 	exten_julia(t_e *e)
 
 void 	draw_julia(t_e *e)
 {
+	printf("ix : %f\n", e->ix);
+	printf("iy : %f\n", e->iy);
 	while (e->y < e->height)
 	{
 		while (e->x < e->width)
 		{
-			e->newRe = 1.5 * (e->x - e->width / 2) / (0.5 * e->zoom * e->width) + e->movex;
-			e->newIm = (e->y - e->height / 2) / (0.5 * e->zoom * e->height) + e->movey;
+			e->newRe = 1.5 * (e->x - e->width / 2) / (0.5 * e->zoom * e->width)
+				+ e->movex;
+			e->newIm = (e->y - e->height / 2) / (0.5 * e->zoom * e->height)
+				+ e->movey;
 			exten_julia(e);
 			if (e->i == e->itmax)
 				pix_to_img(e, e->i * 0);	
 			else
-				pix_to_img(e, (e->i));
+				pix_to_img(e, (e->i * 150000));
 			e->x++;
-			e->i = 20;
+			e->i = 0;
 		}
 		e->x = 0;
 		e->y++;
