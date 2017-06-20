@@ -16,20 +16,16 @@
 **	Draw the right fractal.
 */
 
-void 	launch_draw(t_e *e)
+void	launch_draw(t_e *e)
 {
 	if (e->indexfrac == 1)
-	{	
 		draw_julia(e);
-	}
 	else if (e->indexfrac == 2)
-	{
 		draw_mandel(e);
-	}
 	else if (e->indexfrac == 3)
-		printf("oth");
+		draw_tricorn(e);
 	else
-		printf("incorrect");
+		ft_putstr("WTF BRO");
 }
 
 /*
@@ -46,6 +42,7 @@ void 	ft_map(t_e *e)
 	mlx_key_hook(e->win, key_pressed, NULL);
 	if (e->indexfrac == 1)
 		mlx_hook(e->win, 6, 1L < 6, mouse_juju, e);
+	mlx_mouse_hook(e->win, mouse_pressed,e);
 	mlx_loop(e->mlx);
 }
 
@@ -65,8 +62,9 @@ int 	select_frac(t_e *e, char *param)
 		init_mandel(e);
 		e->indexfrac = 2;
 	}
-	else if (ft_strcmp(param, "oth") == 0)
+	else if (ft_strcmp(param, "tricorn") == 0)
 	{
+		init_tricorn(e);
 		e->indexfrac = 3;
 	}
 	else

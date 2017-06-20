@@ -14,7 +14,7 @@
 
 
 /*
-**	Main function for events.
+**	"Main" function for events.
 */
 
 int 	key_pressed(int keycode)
@@ -24,11 +24,14 @@ int 	key_pressed(int keycode)
 	return (0);
 }
 
+/*
+**	Mouse for julia
+*/
+
 int 	mouse_juju(int x, int y, t_e *e)
 {
 	printf("x : %d\n", x);
 	printf("y : %d\n", y);
-	mlx_clear_window(e->mlx, e->win);
 	e->ix = (double)x / (double)(e->zoom / 2) - 1;
   	e->iy = (double)y / (double)(e->zoom / 2) - 1;
     e->ix*=0.0002;
@@ -36,6 +39,23 @@ int 	mouse_juju(int x, int y, t_e *e)
     e->ix++;
     e->iy++;
     draw_julia(e);
+	return (0);
+}
+
+/*
+**	Zoom (mouse)
+*/
+
+int		mouse_pressed(int mousecode, int x, int y, t_e e)
+{
+	// if (mousecode == 4 || mousecode == 1)
+	// 	zoom(x, y, e);
+	// else if (mousecode == 5 || mousecode == 2)
+	// 	dezoom(e);
+	printf("Mousecode : %d\n", mousecode);
+	printf("x : %d\n", x);
+	printf("y : %d\n", y);
+	launch_draw(&e);
 	return (0);
 }
 

@@ -16,7 +16,7 @@
 **	Initialize parameters for Julia fractal.
 */
 
-t_e		init_julia(t_e *e)
+void		init_julia(t_e *e)
 {
 	e->width = 1000;
 	e->height = 1000;
@@ -31,14 +31,14 @@ t_e		init_julia(t_e *e)
 	e->itmax = 200;
 	e->ix = 1;
 	e->iy = 1;
-	return (*e);
+	e->indexfrac = 1;
 }
 
 /*
 **	Calculate, for each iterations
 */
 
-t_e 	exten_julia(t_e *e)
+void 	exten_julia(t_e *e)
 {
 	while (e->i < e->itmax)
 	{
@@ -50,7 +50,6 @@ t_e 	exten_julia(t_e *e)
 			break;
 		e->i++;
 	}
-	return (*e);
 }
 
 /*
@@ -59,6 +58,8 @@ t_e 	exten_julia(t_e *e)
 
 void 	draw_julia(t_e *e)
 {
+	e->indexfrac = 1;
+	printf("indexfra : %d\n", e->indexfrac);
 	printf("ix : %f\n", e->ix);
 	printf("iy : %f\n", e->iy);
 	while (e->y < e->height)
@@ -80,5 +81,5 @@ void 	draw_julia(t_e *e)
 		e->x = 0;
 		e->y++;
 	}
-	mlx_put_image_to_window(e, e->win, e->imgptr, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win, e->imgptr, 0, 0);
 }

@@ -16,7 +16,7 @@
 **	Initialize parameters for Mandelbrot fractal.
 */
 
-t_e		init_mandel(t_e *e)
+void		init_mandel(t_e *e)
 {
 	e->width = 1000;
 	e->height = 1000;
@@ -33,27 +33,25 @@ t_e		init_mandel(t_e *e)
 	e->oldRe = 0;
 	e->newIm = 0;
 	e->oldIm = 0;
-	return (*e);
 }
 
 /*
 **	Reinitialize real part & imaginary part to 0
 */
 
-t_e		reinit_mandel(t_e *e)
+void		reinit_mandel(t_e *e)
 {
 	e->newRe = 0;
 	e->oldRe = 0;
 	e->newIm = 0;
 	e->oldIm = 0;
-	return (*e);
 }
 
 /*
 **	Calculate, for each iterations.
 */
 
-t_e 	exten_mandel(t_e *e)
+void	exten_mandel(t_e *e)
 {
 	while (e->i < e->itmax)
 	{
@@ -65,7 +63,6 @@ t_e 	exten_mandel(t_e *e)
 			break;
 		e->i++;
 	}
-	return (*e);
 }
 
 /*
