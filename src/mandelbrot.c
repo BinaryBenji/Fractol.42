@@ -18,14 +18,14 @@
 
 void		init_mandel(t_e *e)
 {
-	e->width = 1000;
+	e->width = 1400;
 	e->height = 1000;
 	e->cRe = -0.7;
 	e->cIm = 0.27015;
 	e->x = 0;
 	e->y = 0;
-	e->i = 0;
-	e->zoom = 1;
+	e->i = 20;
+	e->zoom = 0.2;
 	e->movex = -0.5;
 	e->movey = 0;
 	e->itmax = 400;
@@ -33,6 +33,7 @@ void		init_mandel(t_e *e)
 	e->oldRe = 0;
 	e->newIm = 0;
 	e->oldIm = 0;
+	e->indexfrac = 2;
 }
 
 /*
@@ -89,5 +90,7 @@ void 	draw_mandel(t_e *e)
 		e->x = 0;
 		e->y++;
 	}
+	e->x = 0;
+	e->y = 0;
 	mlx_put_image_to_window(e->mlx, e->win, e->imgptr, 0, 0);
 }

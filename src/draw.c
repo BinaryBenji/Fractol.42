@@ -19,29 +19,27 @@ void	pix_to_img(t_e *e, int color)
 		+ (e->x * 4), &e->color, sizeof(int));
 }
 
-// void	zoom(t_e *e)
-// {
-// 	// e->x2 = x;
-// 	// e->y2 = y;
-// 	// e->x1 = (x / e->zoom + e->x1) - ((e->zoom * 1.3) / 2);
-// 	// e->x1 += ((e->zoom * 1.3) / 2) - (x / (e->zoom * 1.3));
-// 	// e->y1 = (y / e->zoom + e->y1) - ((e->zoom * 1.3) / 2);
-// 	// e->y1 += ((e->zoom * 1.3) / 2) - (y / (e->zoom * 1.3));
-// 	// e->zoom *= 1.3;
-// 	printf("%d\n", e->itmax);
-// 	//e->itmax = e->itmax;
-// 	printf("zoom");
-// }
+void	zoom(t_e *e, int x, int y)
+{
+	// printf("x : %d\n", x);
+	// printf("y : %d\n", y);
+	e->x2 = x;
+	e->y2 = y;
+	e->x1 = (x / e->zoom + e->x) - ((e->zoom * 1.25) / 2);
+	e->y1 = (y / e->zoom + e->y) - ((e->zoom * 1.25) / 2);
+	e->x1 += ((e->zoom * 1.25) / 2) - (x / (e->zoom * 1.25));
+	// e->y1 = (y / e->zoom + e->y1) - ((e->zoom * 1.25) / 2);
+	e->y1 += ((e->zoom * 1.25) / 2) - (y / (e->zoom * 1.25));
+	// e->movex = x;
+	// e->movey = y;
+	e->zoom *= 1.25;
+}
 
-// void	dezoom(t_e *e)
-// {
-// 	// e->x1 = (e->x2 / e->zoom + e->x1) - ((e->zoom / 1.3) / 2);
-// 	// e->x1 += ((e->zoom / 1.3) / 2) - (e->x2 / (e->zoom / 1.3));
-// 	// e->y1 = (e->y2 / e->zoom + e->y1) - ((e->zoom / 1.3) / 2);
-// 	// e->y1 += ((e->zoom / 1.3) / 2) - (e->y2 / (e->zoom / 1.3));
-// 	// e->zoom /= 1.3;
-// 	// e->it_max--;
-// 	printf("%d\n", e->itmax);
-// 	//e->itmax = e->itmax;
-// 	printf("unzoom");
-// }
+void	dezoom(t_e *e)
+{
+	e->x1 = (e->x2 / e->zoom + e->x1) - ((e->zoom / 1.25) / 2);
+	e->x1 += ((e->zoom / 1.25) / 2) - (e->x2 / (e->zoom / 1.25));
+	e->y1 = (e->y2 / e->zoom + e->y1) - ((e->zoom / 1.25) / 2);
+	e->y1 += ((e->zoom / 1.25) / 2) - (e->y2 / (e->zoom / 1.25));
+	e->zoom /= 1.25;
+}

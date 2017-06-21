@@ -18,19 +18,20 @@
 
 void		init_julia(t_e *e)
 {
-	e->width = 1000;
+	e->width = 1400;
 	e->height = 1000;
 	e->cRe = -0.7;
 	e->cIm = 0.27015;
 	e->x = 0;
 	e->y = 0;
-	e->i = 0;
-	e->zoom = 1;
+	e->i = 150;
+	e->zoom = 0.15;
 	e->movex = 0;
 	e->movey = 0;
-	e->itmax = 200;
+	e->itmax = 400;
 	e->ix = 1;
 	e->iy = 1;
+	e->mov_juju = 1;
 	e->indexfrac = 1;
 }
 
@@ -58,10 +59,6 @@ void 	exten_julia(t_e *e)
 
 void 	draw_julia(t_e *e)
 {
-	e->indexfrac = 1;
-	printf("indexfra : %d\n", e->indexfrac);
-	printf("ix : %f\n", e->ix);
-	printf("iy : %f\n", e->iy);
 	while (e->y < e->height)
 	{
 		while (e->x < e->width)
@@ -72,14 +69,16 @@ void 	draw_julia(t_e *e)
 				+ e->movey;
 			exten_julia(e);
 			if (e->i == e->itmax)
-				pix_to_img(e, e->i * 0);	
+				pix_to_img(e, 0);	
 			else
-				pix_to_img(e, (e->i * 150000));
+				pix_to_img(e, (e->i * 3400000));
 			e->x++;
-			e->i = 0;
+			e->i = 150;
 		}
 		e->x = 0;
 		e->y++;
 	}
+	e->x = 0;
+	e->y = 0;
 	mlx_put_image_to_window(e->mlx, e->win, e->imgptr, 0, 0);
 }

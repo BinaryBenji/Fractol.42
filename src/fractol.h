@@ -18,7 +18,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include <fcntl.h>
-# include "mlx.h"
+# include <mlx.h>
 
 typedef struct 		s_e
 {
@@ -57,20 +57,23 @@ typedef struct 		s_e
 	double			y1;
 	double			x2;
 	double			y2;
+	int 			mov_juju;
 }			   		t_e;
 
 //void				ft_dezoom(t_e *e);
 //void				ft_zoom(t_e *e)
 
-void					init_tricorn(t_e *e);
+void				dezoom(t_e *e);
+void				zoom(t_e *e, int x, int y);
+void				init_tricorn(t_e *e);
 void 				exten_tricorn(t_e *e);
 void				draw_tricorn(t_e *e);
-int					mouse_pressed(int mousecode, int x, int y, t_e e);
+int					mouse_pressed(int mousecode, int x, int y, t_e *e);
 int 				mouse_juju(int x, int y, t_e *e);
 void 				pix_to_img(t_e *e, int color);
 void 				draw_mandel(t_e *e);
 void 				ft_map(t_e *e);
-int 				key_pressed(int keycode);
+int 				key_pressed(int keycode, t_e *e);
 void				init_mandel(t_e *e);
 void				init_julia(t_e *e);
 int					exiterror(void);
@@ -78,6 +81,6 @@ int					error(void);
 int					usage(void);
 int 				select_frac(t_e *e, char *param);
 void 				draw_julia(t_e *e);
-void					reinit_mandel(t_e *e);
+void				reinit_mandel(t_e *e);
 void				launch_draw(t_e *e);
 #endif
