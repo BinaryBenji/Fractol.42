@@ -27,6 +27,18 @@ int 	key_pressed(int keycode, t_e *e)
 		else
 			e->mov_juju = 1;
 	}
+	if (keycode == 123 || keycode == 124 || keycode == 126 || keycode == 125)
+	{
+		if (keycode == 123)
+			e->movex+=1;
+		if (keycode == 124)
+			e->movex-=1;
+		if (keycode == 126)
+			e->movey+=1;
+		if (keycode == 125)
+			e->movey-=1;
+		launch_draw(e);
+	}
 	return (0);
 }
 
