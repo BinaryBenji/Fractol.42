@@ -30,7 +30,7 @@ HEA = 				$(addprefix $(HEA_PATH)/,$(HEA_NAME))
 #	Sources infos
 SRC_PATH = 			./src
 SRC_NAME = 			main.c utils.c events.c julia.c mandelbrot.c draw.c \
-					tricorn.c
+					chameleon.c burningship.c
 SRC = 				$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 #	Objects infos
