@@ -18,34 +18,18 @@
 
 void		init_mandel(t_e *e)
 {
-	e->width = 1400;
+	e->width = 1600;
 	e->height = 1000;
-	e->cRe = -0.7;
-	e->cIm = 0.27015;
 	e->x = 0;
 	e->y = 0;
-	e->i = 20;
-	e->zoom = 0.2;
-	e->movex = -0.5;
-	e->movey = 0;
-	e->itmax = 400;
-	e->newRe = 0;
-	e->oldRe = 0;
-	e->newIm = 0;
-	e->oldIm = 0;
+	e->i = 0;
+	e->x1 = -5.5;
+	e->x2 = 2.5;
+	e->y1 = -3.25;
+	e->y2 = 3;
+	e->itmax = 80;
+	e->zoom = 150;
 	e->indexfrac = 2;
-}
-
-/*
-**	Reinitialize real part & imaginary part to 0
-*/
-
-void		reinit_mandel(t_e *e)
-{
-	e->newRe = 0;
-	e->oldRe = 0;
-	e->newIm = 0;
-	e->oldIm = 0;
 }
 
 /*
@@ -54,14 +38,11 @@ void		reinit_mandel(t_e *e)
 
 void	exten_mandel(t_e *e)
 {
-	while (e->i < e->itmax)
+	while (e->z_r * e->z_r + e->z_i * e->z_i < 4 && e->i < e->itmax)
 	{
-		e->oldRe = e->newRe;
-		e->oldIm = e->newIm;
-		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
-		e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
-		if ((e->newRe * e->newRe + e->newIm * e->newIm) > 4)
-			break;
+		e->tmp = e->z_r;
+		e->z_r = e->z_r * e->z_r - e->z_i * e->z_i + e->c_r;
+		e->z_i = 2 * e->z_i * e->tmp + e->c_i;
 		e->i++;
 	}
 }
@@ -76,19 +57,17 @@ void 	draw_mandel(t_e *e)
 	{
 		while (e->x < e->width)
 		{
-			e->pr = 1.5 * (e->x - e->width / 2) / (0.5 * e->zoom * e->width) + e->movex;
-    		e->pi = (e->y - e->height / 2) / (0.5 * e->zoom * e->height) + e->movey;
-    		reinit_mandel(e);
+			e->c_r = e->x / e->zoom + e->x1;
+			e->c_i = e->y / e->zoom + e->y1;
+			e->z_r = 0;
+			e->z_i = 0;
 			exten_mandel(e);
-			if (e->i == e->itmax)
-				pix_to_img(e, e->i * 0);
-			else
-				pix_to_img(e, e->i * 20000000);
+			bfr_pix(e);
+			e->i = 0;
 			e->x++;
-			e->i = 20;
 		}
-		e->x = 0;
 		e->y++;
+		e->x = 0;
 	}
 	e->x = 0;
 	e->y = 0;

@@ -34,6 +34,7 @@ int		error(void)
 
 int		usage(void)
 {
-	ft_putstr_fd("usage: ./fractol [julia]/[mandelbrot]/[tricorn] \n", 2);
+	ft_putstr_fd("usage: ./fractol [julia]/[mandelbrot]/\
+[chameleon]/[burningship] \n", 2);
 	return (-1);
 }

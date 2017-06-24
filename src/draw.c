@@ -12,6 +12,14 @@
 
 #include "fractol.h"
 
+void 	bfr_pix(t_e *e)
+{
+	if (e->i == e->itmax)
+		pix_to_img(e, 0);	
+	else
+		pix_to_img(e, (e->i * 1100000));
+}
+
 void	pix_to_img(t_e *e, int color)
 {
 	e->color = mlx_get_color_value(e->mlx, color);
@@ -21,25 +29,29 @@ void	pix_to_img(t_e *e, int color)
 
 void	zoom(t_e *e, int x, int y)
 {
-	// printf("x : %d\n", x);
-	// printf("y : %d\n", y);
-	e->x2 = x;
-	e->y2 = y;
-	e->x1 = (x / e->zoom + e->x) - ((e->zoom * 1.25) / 2);
-	e->y1 = (y / e->zoom + e->y) - ((e->zoom * 1.25) / 2);
-	e->x1 += ((e->zoom * 1.25) / 2) - (x / (e->zoom * 1.25));
-	// e->y1 = (y / e->zoom + e->y1) - ((e->zoom * 1.25) / 2);
-	e->y1 += ((e->zoom * 1.25) / 2) - (y / (e->zoom * 1.25));
-	// e->movex = x;
-	// e->movey = y;
-	e->zoom *= 1.25;
+	double x_n;
+	double y_n;
+
+	if (y > 0 && x > 0)
+	{
+		x_n = (x / e->zoom) + e->x1;
+		y_n = (y / e->zoom) + e->y1;
+		e->zoom *= 1.35;
+		e->x1 = x_n - (x / e->zoom);
+		e->y1 = y_n - (y / e->zoom);
+		launch_draw(e);
+	}
 }
 
-void	dezoom(t_e *e)
+void	dezoom(t_e *e, int x, int y)
 {
-	e->x1 = (e->x2 / e->zoom + e->x1) - ((e->zoom / 1.25) / 2);
-	e->x1 += ((e->zoom / 1.25) / 2) - (e->x2 / (e->zoom / 1.25));
-	e->y1 = (e->y2 / e->zoom + e->y1) - ((e->zoom / 1.25) / 2);
-	e->y1 += ((e->zoom / 1.25) / 2) - (e->y2 / (e->zoom / 1.25));
-	e->zoom /= 1.25;
+	double x_n;
+	double y_n;
+
+	x_n = (x / e->zoom) + e->x1;
+	y_n = (y / e->zoom) + e->y1;
+	e->zoom /= 1.35;
+	e->x1 = x_n - (x / e->zoom);
+	e->y1 = y_n - (y / e->zoom);
+	launch_draw(e);
 }

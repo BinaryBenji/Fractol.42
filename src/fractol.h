@@ -57,18 +57,21 @@ typedef struct 		s_e
 	double			y1;
 	double			x2;
 	double			y2;
+	double 			c_r;
+	double			c_i;
 	int 			mov_juju;
 }			   		t_e;
 
-//void				ft_dezoom(t_e *e);
-//void				ft_zoom(t_e *e)
-
-void				dezoom(t_e *e);
+void				init_burn(t_e *e);
+void 				draw_burn(t_e *e);
+void				exten_burn(t_e *e);
+void 				bfr_pix(t_e *e);
+void				dezoom(t_e *e, int x, int y);
 void				zoom(t_e *e, int x, int y);
-void				init_tricorn(t_e *e);
-void 				exten_tricorn(t_e *e);
-void				draw_tricorn(t_e *e);
-int					mouse_pressed(int mousecode, int x, int y, t_e *e);
+void				init_chameleon(t_e *e);
+void 				exten_chameleon(t_e *e);
+void				draw_chameleon(t_e *e);
+int					mouse_pressed(int mousecode,  int x, int y,t_e *e);
 int 				mouse_juju(int x, int y, t_e *e);
 void 				pix_to_img(t_e *e, int color);
 void 				draw_mandel(t_e *e);

@@ -23,7 +23,9 @@ void	launch_draw(t_e *e)
 	else if (e->indexfrac == 2)
 		draw_mandel(e);
 	else if (e->indexfrac == 3)
-		draw_tricorn(e);
+		draw_chameleon(e);
+	else if (e->indexfrac == 4)
+		draw_burn(e);
 	else
 		ft_putstr("WTF BRO");
 }
@@ -62,10 +64,15 @@ int 	select_frac(t_e *e, char *param)
 		init_mandel(e);
 		e->indexfrac = 2;
 	}
-	else if (ft_strcmp(param, "tricorn") == 0)
+	else if (ft_strcmp(param, "chameleon") == 0)
 	{
-		init_tricorn(e);
+		init_chameleon(e);
 		e->indexfrac = 3;
+	}
+	else if (ft_strcmp(param, "burningship") == 0)
+	{
+		init_burn(e);
+		e->indexfrac = 4;
 	}
 	else
 		return (0);

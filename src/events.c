@@ -50,10 +50,10 @@ int 	mouse_juju(int x, int y, t_e *e)
 {
 	if (e->mov_juju == 1)
 	{
-		e->ix = (double)x / (double)(e->zoom / 2) +1;
-	 	e->iy = (double)y / (double)(e->zoom / 2) +1;
-	    e->ix*=0.0002;
-	    e->iy*=0.0002;
+		e->c_r = (double)x / (double)(e->zoom / 2) +1;
+	 	e->c_i = (double)y / (double)(e->zoom / 2) +1;
+	    e->c_r*=0.0002;
+	    e->c_i*=0.0002;
 	    draw_julia(e);
 	}
 	return (0);
@@ -63,28 +63,17 @@ int 	mouse_juju(int x, int y, t_e *e)
 **	Zoom (mouse)
 */
 
-int		mouse_pressed(int mousecode, int x, int y, t_e *e)
+int		mouse_pressed(int mousecode, int x, int y,t_e *e)
 {
 	if (mousecode == 4 || mousecode == 1)
 	{
-		zoom(e, x, y);
+		zoom(e,x,y);
 		launch_draw(e);
 	}
 	else if (mousecode == 5 || mousecode == 2)
 	{
-		dezoom(e);
+		dezoom(e, x, y);
 		launch_draw(e);
 	}
 	return (0);
 }
-
-// int                mouse_julia(int x, int y, t_env *e)
-// {
-//     if (e->on == 1)
-//     {
-//         e->julx = (double)x / (double)(e->zoom / 2) - 1;
-//         e->july = (double)y / (double)(e->zoom / 2) - 1;
-//     }
-//     ft_draw(e);
-//     return (0);
-// }
