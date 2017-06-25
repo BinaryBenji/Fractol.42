@@ -12,13 +12,27 @@
 
 #include "fractol.h"
 
-void 	bfr_pix(t_e *e)
+/*
+**	Checks if a pixel should be colored or not.
+**	Colored if the serie tends towards infinity.
+*/
+
+void	bfr_pix(t_e *e)
 {
 	if (e->i == e->itmax)
-		pix_to_img(e, 0);	
+		pix_to_img(e, 0);
 	else
-		pix_to_img(e, (e->i * 1100000));
+	{
+		if (e->indexfrac == 4)
+			pix_to_img(e, (e->i * 900000));
+		else
+			pix_to_img(e, (e->i * 1100000));
+	}
 }
+
+/*
+**	Fill 3 chars with the color * i
+*/
 
 void	pix_to_img(t_e *e, int color)
 {
@@ -26,6 +40,10 @@ void	pix_to_img(t_e *e, int color)
 	ft_memmove(e->imgstr + (4 * (e->width * e->y))
 		+ (e->x * 4), &e->color, sizeof(int));
 }
+
+/*
+**	Zoom according to previous coord
+*/
 
 void	zoom(t_e *e, int x, int y)
 {
@@ -42,6 +60,10 @@ void	zoom(t_e *e, int x, int y)
 		launch_draw(e);
 	}
 }
+
+/*
+**	Unzoom according to previous coord
+*/
 
 void	dezoom(t_e *e, int x, int y)
 {

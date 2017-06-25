@@ -22,6 +22,11 @@ int		exiterror(void)
 	exit(-1);
 }
 
+int		exit_cl(void)
+{
+	exit(0);
+}
+
 int		error(void)
 {
 	ft_putstr_fd("error\n", 1);

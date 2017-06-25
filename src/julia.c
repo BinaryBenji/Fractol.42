@@ -16,7 +16,7 @@
 **	Initialize parameters for Julia fractal.
 */
 
-void		init_julia(t_e *e)
+void	init_julia(t_e *e)
 {
 	e->width = 1600;
 	e->height = 1000;
@@ -29,7 +29,7 @@ void		init_julia(t_e *e)
 	e->y2 = 3;
 	e->c_r = -0.63;
 	e->c_i = -0.54;
-	e->itmax = 140;
+	e->itmax = 100;
 	e->zoom = 200;
 	e->indexfrac = 0;
 	e->mov_juju = 1;
@@ -39,7 +39,7 @@ void		init_julia(t_e *e)
 **	Calculate, for each iterations
 */
 
-void 	exten_julia(t_e *e)
+void	exten_julia(t_e *e)
 {
 	while (e->z_r * e->z_r + e->z_i * e->z_i < 4 && e->i < e->itmax)
 	{
@@ -54,7 +54,7 @@ void 	exten_julia(t_e *e)
 **	Create image of Julia fractal.
 */
 
-void 	draw_julia(t_e *e)
+void	draw_julia(t_e *e)
 {
 	while (e->y < e->height)
 	{

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chameleon.c                                          :+:      :+:    :+:   */
+/*   chameleon.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bzmuda <bzmuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/21 10:27:58 by bzmuda            #+#    #+#             */
-/*   Updated: 2017/06/21 10:28:01 by bzmuda           ###   ########.fr       */
+/*   Created: 2017/06/25 11:56:06 by bzmuda            #+#    #+#             */
+/*   Updated: 2017/06/25 11:56:09 by bzmuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Initialize parameters for Chameleon fractal.
 */
 
-void				init_chameleon(t_e *e)
+void	init_chameleon(t_e *e)
 {
 	e->width = 1600;
 	e->height = 1000;
@@ -30,7 +30,7 @@ void				init_chameleon(t_e *e)
 	e->c_r = 0.29;
 	e->c_i = 0.02;
 	e->itmax = 140;
-	e->zoom = 200;	
+	e->zoom = 200;
 	e->indexfrac = 3;
 }
 
@@ -38,7 +38,7 @@ void				init_chameleon(t_e *e)
 **	Calculate, for each iterations
 */
 
-void 	exten_chameleon(t_e *e)
+void	exten_chameleon(t_e *e)
 {
 	while (e->z_r * e->z_r + e->z_i * e->z_i < 4 && e->i < e->itmax)
 	{
@@ -53,10 +53,10 @@ void 	exten_chameleon(t_e *e)
 **	Create image of Chameleon fractal.
 */
 
-void				draw_chameleon(t_e *e)
+void	draw_chameleon(t_e *e)
 {
 	while (e->y < e->height)
-	{		
+	{
 		while (e->x < e->width)
 		{
 			e->c_r = e->c_r;
@@ -66,7 +66,7 @@ void				draw_chameleon(t_e *e)
 			exten_chameleon(e);
 			bfr_pix(e);
 			e->i = 0;
-	  		e->x++;
+			e->x++;
 		}
 		e->y++;
 		e->x = 0;

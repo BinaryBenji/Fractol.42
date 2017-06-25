@@ -16,7 +16,7 @@
 **	Initialize parameters for Mandelbrot fractal.
 */
 
-void		init_mandel(t_e *e)
+void	init_mandel(t_e *e)
 {
 	e->width = 1600;
 	e->height = 1000;
@@ -27,7 +27,7 @@ void		init_mandel(t_e *e)
 	e->x2 = 2.5;
 	e->y1 = -3.25;
 	e->y2 = 3;
-	e->itmax = 80;
+	e->itmax = 40;
 	e->zoom = 150;
 	e->indexfrac = 2;
 }
@@ -51,7 +51,7 @@ void	exten_mandel(t_e *e)
 **	Create image of Mandelbrot fractal.
 */
 
-void 	draw_mandel(t_e *e)
+void	draw_mandel(t_e *e)
 {
 	while (e->y < e->height)
 	{

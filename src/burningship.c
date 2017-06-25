@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   burningship.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bzmuda <bzmuda@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/25 11:56:23 by bzmuda            #+#    #+#             */
+/*   Updated: 2017/06/25 11:56:25 by bzmuda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 /*
-**	Initialize parameters for burningship fractal.
+**	Initialize parameters for Burningship fractal.
 */
 
-void		init_burn(t_e *e)
+void	init_burn(t_e *e)
 {
 	e->width = 1600;
 	e->height = 1000;
@@ -36,10 +48,10 @@ void	exten_burn(t_e *e)
 }
 
 /*
-**	Create image of burningship fractal.
+**	Create image of Burningship fractal.
 */
 
-void 	draw_burn(t_e *e)
+void	draw_burn(t_e *e)
 {
 	while (e->y < e->height)
 	{
