@@ -11,4 +11,6 @@
 Compile project : <code> make </code><br/>
 Run the project : <code> ./fractol julia </code> <code> ./fractol mandelbrot </code> <code> ./fractol chameleon </code> <code> ./fractol burningship </code>
 
+<h3> Julia :</h3>
+
 
