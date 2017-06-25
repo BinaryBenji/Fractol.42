@@ -2,7 +2,9 @@
 <h3> 2D Fractal Design </h3>
 
 <h3> How it works : </h3>
-<li> Zoom with Mouse button / Mouse wheel
+<li> Zoom with Mouse button / Mouse wheel </li>
+<li> To quit : <code> ESC </code> </li>
+<li> On Julia fractal : <code> L </code> to lock the mouse motion </li>
 <li> Compatible MacOS and Ubuntu-based distribution. Make sure you alrealy downloaded mlx library </li>
 
 <h3> Compile and run the project : </h3>
